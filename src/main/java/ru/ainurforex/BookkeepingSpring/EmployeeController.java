@@ -16,49 +16,23 @@ public class EmployeeController {
 
 
     @GetMapping(path = "add")
-    public String add(@RequestParam("firstName") String firstname, @RequestParam("lastName") String lastName) {
-
-        Employee employee = new Employee(firstname, lastName);
-        try {
-            employeeService.addEmployee(employee);
-        } catch (EmployeeAlreadyAddedException e) {
-            return e.getMessage();
-        }
-        return employee.toString();
+    public Employee add(@RequestParam("firstName") String firstname, @RequestParam("lastName") String lastName) {
+        return employeeService.addEmployee(firstname, lastName);
     }
 
     @GetMapping(path = "remove")
-    public String remove(@RequestParam("firstName") String firstname, @RequestParam("lastName") String lastName) {
-        Employee employee = new Employee(firstname, lastName);
-        try {
-            employeeService.removeEmployee(employee);
-        } catch (EmployeeNotFoundException e) {
-            return e.getMessage();
-        }
-        return employee.toString();
+    public Employee remove(@RequestParam("firstName") String firstname, @RequestParam("lastName") String lastName) {
+
+        return employeeService.removeEmployee(firstname, lastName);
     }
 
     @GetMapping(path = "find")
-    public String find(@RequestParam("firstName") String firstname, @RequestParam("lastName") String lastName) {
-        Employee employee = new Employee(firstname, lastName);
-        try {
-            if (employeeService.findEmployee(employee)) {
-                return employee.toString();
-            }
-        } catch (EmployeeNotFoundException e) {
-            return e.getMessage();
-        }
-        return "";
+    public Employee find(@RequestParam("firstName") String firstname, @RequestParam("lastName") String lastName) {
+        return employeeService.findEmployee(firstname, lastName);
     }
 
     @GetMapping(path = "printallemployee")
     public List printAllEmployee() {
         return employeeService.printAllEmployee();
     }
-
-    @GetMapping(path = "printindex")
-    public Employee printIndex(@RequestParam("index") int index) {
-        return employeeService.getEmployeeForIndex(index);
-    }
-
 }
