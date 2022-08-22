@@ -3,6 +3,7 @@ package ru.ainurforex.BookkeepingSpring;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -22,7 +23,6 @@ public class EmployeeController {
 
     @GetMapping(path = "remove")
     public Employee remove(@RequestParam("firstName") String firstname, @RequestParam("lastName") String lastName) {
-
         return employeeService.removeEmployee(firstname, lastName);
     }
 
@@ -31,7 +31,7 @@ public class EmployeeController {
         return employeeService.findEmployee(firstname, lastName);
     }
 
-    @GetMapping(path = "printallemployee")
+    @GetMapping(path = "printAllEmployee")
     public List printAllEmployee() {
         return employeeService.printAllEmployee();
     }
