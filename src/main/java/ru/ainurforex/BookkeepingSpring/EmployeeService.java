@@ -2,15 +2,12 @@ package ru.ainurforex.BookkeepingSpring;
 
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class EmployeeService {
 
-    private Map<Integer, Employee> employeesBook;
+    private Map<String, Employee> employeesBook;
 
     public EmployeeService() {
         this.employeesBook = new HashMap<>();
@@ -27,17 +24,17 @@ public class EmployeeService {
 
     public Employee addEmployee(String firstname, String lastName) {
         Employee employee = new Employee(firstname, lastName);
-        if (findEmployeeInMap(employee)) {
+        if (employeesBook.containsKey(employee.getFullName())) {
             throw new EmployeeAlreadyAddedException("Работник с данными параметрами уже существует");
         }
-        employeesBook.put(employee.hashCode(), employee);
+        employeesBook.put(employee.getFullName(), employee);
         return employee;
     }
 
     public Employee removeEmployee(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        if (findEmployeeInMap(employee)) {
-            employeesBook.remove(employee.hashCode());
+        if (employeesBook.containsKey(employee.getFullName())) {
+            employeesBook.remove(employee.getFullName());
             return employee;
         }
         throw new EmployeeNotFoundException("Работник с данными параметрами не найден.");
@@ -46,23 +43,15 @@ public class EmployeeService {
 
     public Employee findEmployee(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        if (findEmployeeInMap(employee)) {
+        if (employeesBook.containsKey(employee.getFullName())) {
             return employee;
         }
         throw new EmployeeNotFoundException("Работник с данными параметрами не найден.");
     }
 
-    private boolean findEmployeeInMap(Employee employee) {
 
-        if (employeesBook.containsKey(employee.hashCode())) {
-            return true;
-        }
-        return false;
-    }
-
-    public List printAllEmployee() {
-        List<Employee> list = new ArrayList<>(employeesBook.values());
-        return list;
+    public Collection<Employee> printAllEmployee() {
+        return Collections.unmodifiableCollection(employeesBook.values());
     }
 
 }

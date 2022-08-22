@@ -2,8 +2,8 @@ package ru.ainurforex.BookkeepingSpring;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
+import java.util.Collection;
+
 
 
 @RestController
@@ -32,7 +32,7 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "printAllEmployee")
-    public List printAllEmployee() {
+    public Collection<Employee> printAllEmployee() {
         return employeeService.printAllEmployee();
     }
 }
