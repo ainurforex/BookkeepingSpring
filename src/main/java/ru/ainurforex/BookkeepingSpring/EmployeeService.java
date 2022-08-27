@@ -42,6 +42,7 @@ public class EmployeeService {
         employeesBook.put("Vasil" + "Vas", new Employee("Vasil", "Vas", 2, 3000));
         employeesBook.put("Pikiv" + "Pik", new Employee("Pikiv", "Pik", 2, 1000));
         employeesBook.put("Gatov" + "Gat", new Employee("Gatov", "Gat", 6, 11000));
+        employeesBook.put("Ribov" + "Rib", new Employee("Ribov", "Rib", 1, 16000));
         return Collections.unmodifiableCollection(employeesBook.values());
     }
 
