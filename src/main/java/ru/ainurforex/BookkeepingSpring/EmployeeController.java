@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "employee")
-public class EmployeeController implements EmployeeControllerInterface{
+public class EmployeeController {
     final private EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
