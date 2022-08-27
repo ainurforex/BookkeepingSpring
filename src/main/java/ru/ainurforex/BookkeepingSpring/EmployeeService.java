@@ -104,5 +104,4 @@ public class EmployeeService {
         return Collections.unmodifiableCollection(listOfEmployeesSortByDepartment);
     }
 
-
 }
