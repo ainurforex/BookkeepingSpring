@@ -79,25 +79,26 @@ public class EmployeeService {
     }
 
     public Optional<Employee> findEmployeesMinSalaryInDepartmentId(int department) {
-        return Optional.of(employeesBook.values()
-                .stream().filter(d -> d.getDepartment() == department)
+        return Optional.of(employeesBook.values().stream()
+                .filter(d -> d.getDepartment() == department)
                 .collect(Collectors.toList())
-                .stream().min(Comparator.comparingInt(e -> e.getSalary())).orElseThrow(() -> new DepartmentNotFound()));
+                .stream().min(Comparator.comparingInt(e -> e.getSalary()))
+                .orElseThrow(() -> new DepartmentNotFound()));
     }
 
 
     public Collection<Employee> listOfEmployeesInDepartment(int department) {
-        return Collections.unmodifiableCollection(employeesBook.values().stream().filter(d -> d.getDepartment() == department)
+        return Collections.unmodifiableCollection(employeesBook.values().stream()
+                .filter(d -> d.getDepartment() == department)
                 .collect(Collectors.toList()));
     }
 
     public Collection<Employee> listOfEmployeesAllDepartment() {
-        HashSet<Integer> departments = new HashSet<>(employeesBook
-                .values().stream().map(d -> d.getDepartment())
-                .collect(Collectors.toList()));
+        HashSet<Integer> departments =new HashSet<>(employeesBook.values().stream()
+                        .map(d -> d.getDepartment())
+                        .collect(Collectors.toList()));
         List<Employee> listOfEmployeesSortByDepartment = new ArrayList<>();
-        departments.forEach(integer -> listOfEmployeesSortByDepartment
-                .addAll(employeesBook.values().stream()
+        departments.forEach(integer -> listOfEmployeesSortByDepartment.addAll(employeesBook.values().stream()
                         .filter(d -> d.getDepartment() == integer)
                         .collect(Collectors.toList()))
         );

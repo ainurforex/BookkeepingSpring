@@ -23,11 +23,11 @@ public class Employee {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return (firstName + lastName).hashCode();
     }
 
-    public boolean equals(Employee employee) {
+    public final boolean equals(Employee employee) {
         return (this.firstName.equals(employee.firstName) && this.lastName.equals(employee.lastName));
     }
 
