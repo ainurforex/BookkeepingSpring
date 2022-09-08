@@ -1,10 +1,10 @@
 package ru.ainurforex.BookkeepingSpring;
 
 import org.springframework.stereotype.Service;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static org.apache.commons.lang3.StringUtils.*;
 
 @Service
 public class EmployeeService {
@@ -29,12 +29,7 @@ public class EmployeeService {
     }
 
     public Employee addEmployee(String firstName, String lastName, int department, int salary) {
-        firstName = setFirstCapitalLetter(firstName);
-        lastName = setFirstCapitalLetter(lastName);
-        if (ckeckOnlyLetter(firstName) == false ||
-                ckeckOnlyLetter(lastName) == false) {
-            throw new BadRequest("Имя и фамилия должны состоять только из букв");
-        }
+        validateInput(firstName, lastName);
         Employee employee = new Employee(firstName, lastName, department, salary);
         if (employeesBook.containsKey(employee.takeFullName())) {
             throw new EmployeeAlreadyAddedException("Работник с данными параметрами уже существует");
@@ -54,12 +49,7 @@ public class EmployeeService {
     }
 
     public Employee removeEmployee(String firstName, String lastName) {
-        firstName = setFirstCapitalLetter(firstName);
-        lastName = setFirstCapitalLetter(lastName);
-        if (ckeckOnlyLetter(firstName) == false ||
-                ckeckOnlyLetter(lastName) == false) {
-            throw new BadRequest("Имя и фамилия должны состоять только из букв");
-        }
+        validateInput(firstName, lastName);
         String keyFullName = firstName + lastName;
         if (employeesBook.containsKey(keyFullName)) {
             Employee employeeReturn = employeesBook.get(keyFullName);
@@ -71,12 +61,7 @@ public class EmployeeService {
 
 
     public Employee findEmployee(String firstName, String lastName) {
-        firstName = setFirstCapitalLetter(firstName);
-        lastName = setFirstCapitalLetter(lastName);
-        if (ckeckOnlyLetter(firstName) == false ||
-                ckeckOnlyLetter(lastName) == false) {
-            throw new BadRequest("Имя и фамилия должны состоять только из букв");
-        }
+        validateInput(firstName, lastName);
         String keyFullName = firstName + lastName;
         if (employeesBook.containsKey(keyFullName)) {
             Employee employeeReturn = employeesBook.get(keyFullName);
@@ -124,13 +109,10 @@ public class EmployeeService {
         return Collections.unmodifiableCollection(listOfEmployeesSortByDepartment);
     }
 
-    private String setFirstCapitalLetter(String word) {
-        word = StringUtils.capitalize(word);
-        return word;
-    }
 
-
-    private boolean ckeckOnlyLetter(String word) {
-        return word.matches("[a-zA-Z]+");
+    private void validateInput(String firstName,String lastName) {
+        if (!(isAlpha(firstName) && isAlpha(lastName))) {
+            throw new invalidInputException("Имя и фамилия должны состоять только из букв");
+        }
     }
 }
