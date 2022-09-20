@@ -1,12 +1,14 @@
-package ru.ainurforex.BookkeepingSpring;
+package ru.ainurforex.BookkeepingSpring.services;
 
 import org.springframework.stereotype.Service;
+import ru.ainurforex.BookkeepingSpring.classes.Employee;
+import ru.ainurforex.BookkeepingSpring.exceptions.DepartmentNotFound;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class DepartmentService {
+public class DepartmentService implements DepartmentServiceInterface{
     final private EmployeeService employeeService;
 
     public DepartmentService(EmployeeService employeeService) {

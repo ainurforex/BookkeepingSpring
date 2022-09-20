@@ -1,17 +1,19 @@
-package ru.ainurforex.BookkeepingSpring;
+package ru.ainurforex.BookkeepingSpring.controllers;
 
 import org.springframework.web.bind.annotation.*;
+import ru.ainurforex.BookkeepingSpring.classes.Employee;
+import ru.ainurforex.BookkeepingSpring.services.EmployeeService;
+import ru.ainurforex.BookkeepingSpring.services.EmployeeServiceInterface;
 
 import java.util.Collection;
-import java.util.Optional;
 
 
 @RestController
 @RequestMapping(path = "employee")
 public class EmployeeController {
-    final private EmployeeService employeeService;
+    final private EmployeeServiceInterface employeeService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeServiceInterface employeeService) {
         this.employeeService = employeeService;
     }
 

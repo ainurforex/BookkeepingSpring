@@ -1,4 +1,4 @@
-package ru.ainurforex.BookkeepingSpring;
+package ru.ainurforex.BookkeepingSpring.classes;
 
 import static org.apache.commons.lang3.StringUtils.*;
 

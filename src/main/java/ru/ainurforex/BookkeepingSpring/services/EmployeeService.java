@@ -1,13 +1,18 @@
-package ru.ainurforex.BookkeepingSpring;
+package ru.ainurforex.BookkeepingSpring.services;
 
 import org.springframework.stereotype.Service;
+import ru.ainurforex.BookkeepingSpring.classes.Employee;
+import ru.ainurforex.BookkeepingSpring.exceptions.EmployeeAlreadyAddedException;
+import ru.ainurforex.BookkeepingSpring.exceptions.EmployeeNotFoundException;
+import ru.ainurforex.BookkeepingSpring.exceptions.invalidInputException;
+
 import java.util.*;
 
 
 import static org.apache.commons.lang3.StringUtils.*;
 
 @Service
-public class EmployeeService {
+public class EmployeeService implements EmployeeServiceInterface{
 
     private Map<String, Employee> employeesBook;
 

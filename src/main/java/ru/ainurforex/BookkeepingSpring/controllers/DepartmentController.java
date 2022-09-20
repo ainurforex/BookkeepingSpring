@@ -1,9 +1,12 @@
-package ru.ainurforex.BookkeepingSpring;
+package ru.ainurforex.BookkeepingSpring.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import ru.ainurforex.BookkeepingSpring.services.DepartmentService;
+import ru.ainurforex.BookkeepingSpring.classes.Employee;
+import ru.ainurforex.BookkeepingSpring.services.DepartmentServiceInterface;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -11,9 +14,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "employee")
 public class DepartmentController {
-    final private DepartmentService departmentService;
+    final private DepartmentServiceInterface departmentService;
 
-    public DepartmentController(DepartmentService departmentService) {
+    public DepartmentController(DepartmentServiceInterface departmentService) {
         this.departmentService = departmentService;
     }
 
