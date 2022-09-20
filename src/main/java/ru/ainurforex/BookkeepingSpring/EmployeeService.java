@@ -2,7 +2,7 @@ package ru.ainurforex.BookkeepingSpring;
 
 import org.springframework.stereotype.Service;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 import static org.apache.commons.lang3.StringUtils.*;
 
@@ -75,40 +75,9 @@ public class EmployeeService {
         return Collections.unmodifiableCollection(employeesBook.values());
     }
 
-    public Optional<Employee> findEmployeesMaxSalaryInDepartmentId(int department) {
-        return Optional.of(employeesBook.values()
-                .stream().filter(d -> d.getDepartment() == department)
-                .collect(Collectors.toList())
-                .stream().max(Comparator.comparingInt(e -> e.getSalary())).orElseThrow(() -> new DepartmentNotFound()));
+    public  Map<String, Employee> getEmployeesBook() {
+        return Collections.unmodifiableMap(employeesBook);
     }
-
-    public Optional<Employee> findEmployeesMinSalaryInDepartmentId(int department) {
-        return Optional.of(employeesBook.values().stream()
-                .filter(d -> d.getDepartment() == department)
-                .collect(Collectors.toList())
-                .stream().min(Comparator.comparingInt(e -> e.getSalary()))
-                .orElseThrow(() -> new DepartmentNotFound()));
-    }
-
-
-    public Collection<Employee> listOfEmployeesInDepartment(int department) {
-        return Collections.unmodifiableCollection(employeesBook.values().stream()
-                .filter(d -> d.getDepartment() == department)
-                .collect(Collectors.toList()));
-    }
-
-    public Collection<Employee> listOfEmployeesAllDepartment() {
-        HashSet<Integer> departments = new HashSet<>(employeesBook.values().stream()
-                .map(d -> d.getDepartment())
-                .collect(Collectors.toList()));
-        List<Employee> listOfEmployeesSortByDepartment = new ArrayList<>();
-        departments.forEach(integer -> listOfEmployeesSortByDepartment.addAll(employeesBook.values().stream()
-                .filter(d -> d.getDepartment() == integer)
-                .collect(Collectors.toList()))
-        );
-        return Collections.unmodifiableCollection(listOfEmployeesSortByDepartment);
-    }
-
 
     private void validateInput(String firstName,String lastName) {
         if (!(isAlpha(firstName) && isAlpha(lastName))) {

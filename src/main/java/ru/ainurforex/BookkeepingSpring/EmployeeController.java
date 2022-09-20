@@ -48,24 +48,4 @@ public class EmployeeController {
     }
 
 
-    @GetMapping(path = "/departments/max-salary")
-    public Optional<Employee> findEmployeesMaxSalaryInDepartmentId(@RequestParam("departmentId") int department) {
-        return employeeService.findEmployeesMaxSalaryInDepartmentId(department);
-    }
-
-    @GetMapping(path = "/departments/min-salary")
-    public Optional<Employee> findEmployeesMinSalaryInDepartmentId(@RequestParam("departmentId") int department) {
-        return employeeService.findEmployeesMinSalaryInDepartmentId(department);
-    }
-
-    @GetMapping(path = "/departments/all", params = "departmentId")
-    public Collection<Employee> listOfEmployeesInDepartment(@RequestParam("departmentId") Integer department) {
-        return employeeService.listOfEmployeesInDepartment(department);
-    }
-
-    @GetMapping(path = "/departments/all")
-    public Collection<Employee> listOfEmployeesInDepartment() {
-        return employeeService.listOfEmployeesAllDepartment();
-
-    }
 }
