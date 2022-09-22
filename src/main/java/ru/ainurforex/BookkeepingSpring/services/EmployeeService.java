@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.ainurforex.BookkeepingSpring.classes.Employee;
 import ru.ainurforex.BookkeepingSpring.exceptions.EmployeeAlreadyAddedException;
 import ru.ainurforex.BookkeepingSpring.exceptions.EmployeeNotFoundException;
-import ru.ainurforex.BookkeepingSpring.exceptions.invalidInputException;
+import ru.ainurforex.BookkeepingSpring.exceptions.InvalidInputException;
 
 import java.util.*;
 
@@ -12,7 +12,7 @@ import java.util.*;
 import static org.apache.commons.lang3.StringUtils.*;
 
 @Service
-public class EmployeeService implements EmployeeServiceInterface{
+public class EmployeeService implements EmployeeServiceInterface {
 
     private Map<String, Employee> employeesBook;
 
@@ -44,12 +44,12 @@ public class EmployeeService implements EmployeeServiceInterface{
     }
 
     public Collection<Employee> addTestEmployee() {
-        employeesBook.put("Petrov" + "Petr", new Employee("Petrov", "Petr", 4, 1000));
-        employeesBook.put("Maksimov" + "Maksim", new Employee("Maksimov", "Maksim", 1, 2000));
-        employeesBook.put("Vasil" + "Vas", new Employee("Vasil", "Vas", 2, 3000));
-        employeesBook.put("Pikiv" + "Pik", new Employee("Pikiv", "Pik", 2, 1000));
-        employeesBook.put("Gatov" + "Gat", new Employee("Gatov", "Gat", 6, 11000));
-        employeesBook.put("Ribov" + "Rib", new Employee("Ribov", "Rib", 1, 16000));
+        employeesBook.put("Pet" + "Petrov", new Employee("Petrov", "Petr", 1, 1000));
+        employeesBook.put("Maksim" + "Maksimov", new Employee("Maksimov", "Maksim", 1, 2000));
+        employeesBook.put("Vas" + "Vasil", new Employee("Vasil", "Vas", 2, 3000));
+        employeesBook.put("Pik" + "Piktiv", new Employee("Pikiv", "Pik", 2, 1000));
+        employeesBook.put("Gat" + "Gatov", new Employee("Gatov", "Gat", 3, 11000));
+        employeesBook.put("Rib" + "Ribov", new Employee("Ribov", "Rib", 3, 16000));
         return Collections.unmodifiableCollection(employeesBook.values());
     }
 
@@ -80,13 +80,15 @@ public class EmployeeService implements EmployeeServiceInterface{
         return Collections.unmodifiableCollection(employeesBook.values());
     }
 
-    public  Map<String, Employee> getEmployeesBook() {
+    public Map<String, Employee> getEmployeesBook() {
         return Collections.unmodifiableMap(employeesBook);
     }
 
-    private void validateInput(String firstName,String lastName) {
+    private void validateInput(String firstName, String lastName) {
         if (!(isAlpha(firstName) && isAlpha(lastName))) {
-            throw new invalidInputException("Имя и фамилия должны состоять только из букв");
+            throw new InvalidInputException("Имя и фамилия должны состоять только из букв");
         }
     }
+
+
 }

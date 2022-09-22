@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "employee")
+@RequestMapping(path = "employee/departments")
 public class DepartmentController {
     final private DepartmentServiceInterface departmentService;
 
@@ -20,24 +20,23 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @GetMapping(path = "/departments/max-salary")
+    @GetMapping(path = "max-salary")
     public Optional<Employee> findEmployeesMaxSalaryInDepartmentId(@RequestParam("departmentId") int department) {
         return departmentService.findEmployeesMaxSalaryInDepartmentId(department);
     }
 
-    @GetMapping(path = "/departments/min-salary")
+    @GetMapping(path = "min-salary")
     public Optional<Employee> findEmployeesMinSalaryInDepartmentId(@RequestParam("departmentId") int department) {
         return departmentService.findEmployeesMinSalaryInDepartmentId(department);
     }
 
-    @GetMapping(path = "/departments/all", params = "departmentId")
+    @GetMapping(path = "all", params = "departmentId")
     public Collection<Employee> listOfEmployeesInDepartment(@RequestParam("departmentId") Integer department) {
         return departmentService.listOfEmployeesInDepartment(department);
     }
 
-    @GetMapping(path = "/departments/all")
+    @GetMapping(path = "all")
     public Collection<Employee> listOfEmployeesInDepartment() {
         return departmentService.listOfEmployeesAllDepartment();
-
     }
 }

@@ -17,11 +17,11 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "<p>" + "{" + '\"' + "firstName" + '\"' + ":" + '\"' + firstName +
+        return "\n" + "<p>" + "\n" + "{" + '\"' + "firstName" + '\"' + ":" + '\"' + firstName +
                 '\"' + "," + '\"' + "lastName" + '\"' + ":" + '\"' + lastName +
                 '\"' + "," + '\"' + "department" + '\"' + ":" + '\"' + department +
                 '\"' + "," + '\"' + "salary" + '\"' + ":" + '\"' + salary +
-                '\"' + "}" + "</p>";
+                '\"' + "}" + "," + "\n" + "</p>";
     }
 
     @Override
