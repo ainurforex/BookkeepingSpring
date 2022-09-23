@@ -8,6 +8,7 @@ import ru.ainurforex.BookkeepingSpring.exceptions.EmployeeNotFoundException;
 import ru.ainurforex.BookkeepingSpring.exceptions.InvalidInputException;
 import ru.ainurforex.BookkeepingSpring.services.EmployeeService;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,73 +20,59 @@ public class EmployeeServiceTests {
     @Test
     public void shouldAddEmployee() {
 
-        employeeService.addEmployee(firstName, lastName, department, salary);
-        String actual = "<p>" + "\n" + "{" + '\"' + "firstName" + '\"' + ":" + '\"' + firstName +
-                '\"' + "," + '\"' + "lastName" + '\"' + ":" + '\"' + lastName +
-                '\"' + "," + '\"' + "department" + '\"' + ":" + '\"' + department +
-                '\"' + "," + '\"' + "salary" + '\"' + ":" + '\"' + salary +
-                '\"' + "}" + "," + "\n" + "</p>";
+        employeeService.addEmployee(FIRST_NAME, LAST_NAME, DEPARTMENT, SALARY);
+        String actual = "firstName " + FIRST_NAME + " lastName " + LAST_NAME +
+                " department " + DEPARTMENT + " salary " + SALARY + "\n";
         String excepted = employeeService.toString();
         Assertions.assertEquals(excepted, actual);
     }
 
     @Test
     public void shouldThrowEmployeeAlreadyAddedExceptionByAlreadyAddedEployee() {
-        employeeService.addEmployee(firstName, lastName, department, salary);
+        employeeService.addEmployee(FIRST_NAME, LAST_NAME, DEPARTMENT, SALARY);
         Assertions.assertThrows(EmployeeAlreadyAddedException.class, () ->
-                employeeService.addEmployee(firstName, lastName, department, salary));
+                employeeService.addEmployee(FIRST_NAME, LAST_NAME, DEPARTMENT, SALARY));
     }
 
     @Test
     public void shouldRemoveEmployee() {
-        employeeService.addEmployee(firstName, lastName, department, salary);
-        String actual = "\n" + "<p>" + "\n" + "{" + '\"' + "firstName" + '\"' + ":" + '\"' + firstName +
-                '\"' + "," + '\"' + "lastName" + '\"' + ":" + '\"' + lastName +
-                '\"' + "," + '\"' + "department" + '\"' + ":" + '\"' + department +
-                '\"' + "," + '\"' + "salary" + '\"' + ":" + '\"' + salary +
-                '\"' + "}" + "," + "\n" + "</p>";
-        String excepted = employeeService.removeEmployee(firstName, lastName).toString();
+        employeeService.addEmployee(FIRST_NAME, LAST_NAME, DEPARTMENT, SALARY);
+        String actual = "firstName " + FIRST_NAME + " lastName " + LAST_NAME +
+                " department " + DEPARTMENT + " salary " + SALARY + "\n";
+        String excepted = employeeService.removeEmployee(FIRST_NAME, LAST_NAME).toString();
         Assertions.assertEquals(excepted, actual);
     }
 
     @Test
     public void shouldThrowEmployeeNotFoundExceptionByNotFoundEployeeByRemoveEmployee() {
         Assertions.assertThrows(EmployeeNotFoundException.class, () ->
-                employeeService.removeEmployee(firstName, lastName));
+                employeeService.removeEmployee(FIRST_NAME, LAST_NAME));
     }
 
     @Test
     public void shouldFindEmployee() {
-        employeeService.addEmployee(firstName, lastName, department, salary);
-        String actual = "\n" + "<p>" + "\n" + "{" + '\"' + "firstName" + '\"' + ":" + '\"' + firstName +
-                '\"' + "," + '\"' + "lastName" + '\"' + ":" + '\"' + lastName +
-                '\"' + "," + '\"' + "department" + '\"' + ":" + '\"' + department +
-                '\"' + "," + '\"' + "salary" + '\"' + ":" + '\"' + salary +
-                '\"' + "}" + "," + "\n" + "</p>";
-        String excepted = employeeService.findEmployee(firstName, lastName).toString();
+        employeeService.addEmployee(FIRST_NAME, LAST_NAME, DEPARTMENT, SALARY);
+        String actual = "firstName " + FIRST_NAME + " lastName " + LAST_NAME +
+                " department " + DEPARTMENT + " salary " + SALARY + "\n";
+        String excepted = employeeService.findEmployee(FIRST_NAME, LAST_NAME).toString();
         Assertions.assertEquals(excepted, actual);
     }
 
     @Test
     public void shouldThrowEmployeeNotFoundExceptionByNotFoundEployeeByFindEmployee() {
-        employeeService.addEmployee(firstName, lastName, department, salary);
+        employeeService.addEmployee(FIRST_NAME, LAST_NAME, DEPARTMENT, SALARY);
         Assertions.assertThrows(EmployeeNotFoundException.class, () ->
-                employeeService.findEmployee(firstName2, lastName2));
+                employeeService.findEmployee(FIRST_NAME_2, LAST_NAME_2));
     }
 
     @Test
     public void shouldPrintAllEmployee() {
-        employeeService.addEmployee(firstName, lastName, department, salary);
-        employeeService.addEmployee(firstName2, lastName2, department2, salary2);
-        String actual = "[" + "\n" + "<p>" + "\n" + "{" + '\"' + "firstName" + '\"' + ":" + '\"' + firstName2 +
-                '\"' + "," + '\"' + "lastName" + '\"' + ":" + '\"' + lastName2 +
-                '\"' + "," + '\"' + "department" + '\"' + ":" + '\"' + department2 +
-                '\"' + "," + '\"' + "salary" + '\"' + ":" + '\"' + salary2 +
-                '\"' + "}" + "," + "\n" + "</p>" + "," + " " + "\n" + "<p>" + "\n" + "{" + '\"' + "firstName" + '\"' + ":" + '\"' + firstName +
-                '\"' + "," + '\"' + "lastName" + '\"' + ":" + '\"' + lastName +
-                '\"' + "," + '\"' + "department" + '\"' + ":" + '\"' + department +
-                '\"' + "," + '\"' + "salary" + '\"' + ":" + '\"' + salary +
-                '\"' + "}" + "," + "\n" + "</p>" + "]";
+        employeeService.addEmployee(FIRST_NAME, LAST_NAME, DEPARTMENT, SALARY);
+        employeeService.addEmployee(FIRST_NAME_2, LAST_NAME_2, DEPARTMENT_2, SALARY_2);
+        String actual = "["+"firstName " + FIRST_NAME_2 + " lastName " + LAST_NAME_2 +
+                " department " + DEPARTMENT_2 + " salary " + SALARY_2 + "\n";
+        actual = actual + ","+" "+"firstName " + FIRST_NAME + " lastName " + LAST_NAME +
+                " department " + DEPARTMENT + " salary " + SALARY + "\n"+"]";
         String excepted = employeeService.printAllEmployee().toString();
         Assertions.assertEquals(excepted, actual);
     }
@@ -93,10 +80,10 @@ public class EmployeeServiceTests {
     @Test
     public void shouldGetEmployeeBook() {
         Map<String, Employee> actual = new HashMap<>();
-        actual.put(firstName + lastName, new Employee(firstName, lastName, department, salary));
-        actual.put(firstName2 + lastName2, new Employee(firstName2, lastName2, department2, salary2));
-        employeeService.addEmployee(firstName, lastName, department, salary);
-        employeeService.addEmployee(firstName2, lastName2, department2, salary2);
+        actual.put(FIRST_NAME + LAST_NAME, new Employee(FIRST_NAME, LAST_NAME, DEPARTMENT, SALARY));
+        actual.put(FIRST_NAME_2 + LAST_NAME_2, new Employee(FIRST_NAME_2, LAST_NAME_2, DEPARTMENT_2, SALARY_2));
+        employeeService.addEmployee(FIRST_NAME, LAST_NAME, DEPARTMENT, SALARY);
+        employeeService.addEmployee(FIRST_NAME_2, LAST_NAME_2, DEPARTMENT_2, SALARY_2);
         Map<String, Employee> excepted = employeeService.getEmployeesBook();
         Assertions.assertEquals(excepted.keySet(), actual.keySet());
     }
@@ -104,6 +91,6 @@ public class EmployeeServiceTests {
     @Test
     public void shouldThrowInvalidInputExceptionByValidateInput() {
         Assertions.assertThrows(InvalidInputException.class, () ->
-                employeeService.addEmployee(firstNameNotValid, lastNameNotValid, department, salary));
+                employeeService.addEmployee(FIRST_NAME_NOT_VALID, LAST_NAME_NOT_VALID, DEPARTMENT, SALARY));
     }
 }

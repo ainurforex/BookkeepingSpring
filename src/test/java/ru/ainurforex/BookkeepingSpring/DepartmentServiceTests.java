@@ -31,27 +31,27 @@ public class DepartmentServiceTests {
 
     @Test
     public void shouldFindEmployeesMaxSalaryInDepartmentId() {
-        Optional<Employee> actual = Optional.of(new Employee(firstName, lastName, department, salary));
-        when(employeeServiceMock.getEmployeesBook()).thenReturn(mapOfEmployee);
+        Optional<Employee> actual = Optional.of(new Employee(FIRST_NAME, LAST_NAME, DEPARTMENT, SALARY));
+        when(employeeServiceMock.getEmployeesBook()).thenReturn(MAP_OF_EMPLOYEE);
         Assertions.assertEquals(departmentService.findEmployeesMaxSalaryInDepartmentId(1).toString(), actual.toString());
     }
 
     @Test
     public void shouldThrowDepartmentNotFoundByfindEmployeesMaxSalaryInDepartmentIdByDepartmentNotFound() {
-        when(employeeServiceMock.getEmployeesBook()).thenReturn(mapOfEmployee);
+        when(employeeServiceMock.getEmployeesBook()).thenReturn(MAP_OF_EMPLOYEE);
         Assertions.assertThrows(DepartmentNotFound.class, () -> departmentService.findEmployeesMaxSalaryInDepartmentId(10));
     }
 
     @Test
     public void shouldFindEmployeesMinSalaryInDepartmentId() {
-        Optional<Employee> actual = Optional.of(new Employee(firstName2, lastName2, department2, salary2));
-        when(employeeServiceMock.getEmployeesBook()).thenReturn(mapOfEmployee);
+        Optional<Employee> actual = Optional.of(new Employee(FIRST_NAME_2, LAST_NAME_2, DEPARTMENT_2, SALARY_2));
+        when(employeeServiceMock.getEmployeesBook()).thenReturn(MAP_OF_EMPLOYEE);
         Assertions.assertEquals(departmentService.findEmployeesMinSalaryInDepartmentId(1).toString(), actual.toString());
     }
 
     @Test
     public void shouldThrowDepartmentNotFoundByfindEmployeesMinSalaryInDepartmentIdByDepartmentNotFound() {
-        when(employeeServiceMock.getEmployeesBook()).thenReturn(mapOfEmployee);
+        when(employeeServiceMock.getEmployeesBook()).thenReturn(MAP_OF_EMPLOYEE);
         Assertions.assertThrows(DepartmentNotFound.class, () ->
                 departmentService.findEmployeesMinSalaryInDepartmentId(10));
     }
@@ -59,10 +59,10 @@ public class DepartmentServiceTests {
     @Test
     public void shouldlistOfEmployeesInDepartment() {
         Collection<Employee> actual = new ArrayList<>(List.of(
-                new Employee(firstName, lastName, department, salary),
-                new Employee(firstName2, lastName2, department2, salary2))).
+                new Employee(FIRST_NAME, LAST_NAME, DEPARTMENT, SALARY),
+                new Employee(FIRST_NAME_2, LAST_NAME_2, DEPARTMENT_2, SALARY_2))).
                 stream().sorted(Comparator.comparing(Employee::getFirstName)).collect(Collectors.toList());
-        when(employeeServiceMock.getEmployeesBook()).thenReturn(mapOfEmployee);
+        when(employeeServiceMock.getEmployeesBook()).thenReturn(MAP_OF_EMPLOYEE);
         List<Employee> excepted = departmentService.listOfEmployeesInDepartment(1).stream().sorted(Comparator.comparing(Employee::getFirstName)).collect(Collectors.toList());
         Assertions.assertEquals(excepted.toString(), actual.toString());
     }
@@ -70,12 +70,12 @@ public class DepartmentServiceTests {
     @Test
     public void shouldlistOfEmployeesAllDepartment() {
         Collection<Employee> actual = List.of(
-                        new Employee(firstName, lastName, department, salary),
-                        new Employee(firstName2, lastName2, department2, salary2),
-                        new Employee(firstName3, lastName3, department3, salary3),
-                        new Employee(firstName4, lastName4, department4, salary4)).
+                        new Employee(FIRST_NAME, LAST_NAME, DEPARTMENT, SALARY),
+                        new Employee(FIRST_NAME_2, LAST_NAME_2, DEPARTMENT_2, SALARY_2),
+                        new Employee(FIRST_NAME_3, LAST_NAME_3, DEPARTMENT_3, SALARY_3),
+                        new Employee(FIRST_NAME_4, LAST_NAME_4, DEPARTMENT_4, SALARY_4)).
                 stream().sorted(Comparator.comparing(Employee::getFirstName)).collect(Collectors.toList());
-        when(employeeServiceMock.getEmployeesBook()).thenReturn(mapOfEmployee);
+        when(employeeServiceMock.getEmployeesBook()).thenReturn(MAP_OF_EMPLOYEE);
         Collection<Employee> excepted = departmentService.listOfEmployeesAllDepartment().stream().sorted(Comparator.comparing(Employee::getFirstName)).collect(Collectors.toList());
         Assertions.assertEquals(excepted.toString(), actual.toString());
     }

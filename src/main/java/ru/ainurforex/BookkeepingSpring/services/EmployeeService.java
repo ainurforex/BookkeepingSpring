@@ -22,15 +22,12 @@ public class EmployeeService implements EmployeeServiceInterface {
 
     @Override
     public String toString() {
-        String result = "<p>" + "\n";
+        String result = "";
         for (Employee value : employeesBook.values()) {
-            result = result + "{" + '\"' + "firstName" + '\"' + ":" + '\"' + value.getFirstName() +
-                    '\"' + "," + '\"' + "lastName" + '\"' + ":" + '\"' + value.getLastName() +
-                    '\"' + "," + '\"' + "department" + '\"' + ":" + '\"' + value.getDepartment() +
-                    '\"' + "," + '\"' + "salary" + '\"' + ":" + '\"' + value.getSalary() +
-                    '\"' + "}" + "," + "\n";
+            result = result + "firstName " + value.getFirstName() + " lastName " + value.getLastName() +
+                    " department " + value.getDepartment() + " salary " + value.getSalary() + "\n";
         }
-        return result + "</p>";
+        return result;
     }
 
     public Employee addEmployee(String firstName, String lastName, int department, int salary) {

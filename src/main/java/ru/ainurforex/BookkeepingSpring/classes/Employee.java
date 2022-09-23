@@ -17,11 +17,8 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "\n" + "<p>" + "\n" + "{" + '\"' + "firstName" + '\"' + ":" + '\"' + firstName +
-                '\"' + "," + '\"' + "lastName" + '\"' + ":" + '\"' + lastName +
-                '\"' + "," + '\"' + "department" + '\"' + ":" + '\"' + department +
-                '\"' + "," + '\"' + "salary" + '\"' + ":" + '\"' + salary +
-                '\"' + "}" + "," + "\n" + "</p>";
+        return "firstName " + firstName + " lastName " + lastName +
+                " department " + department + " salary " + salary + "\n";
     }
 
     @Override
